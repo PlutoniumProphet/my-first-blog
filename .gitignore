@@ -1,0 +1,8 @@
+.DS_Store
+blogenv
+*.pyc
+*~
+/.vscode
+__pycache__
+db.sqlite3
+/static
