@@ -15,7 +15,7 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_new(request):
-    """Form to edit post."""
+    """Form to create new post from blank form."""
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -28,7 +28,7 @@ def post_new(request):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 def post_edit(request, pk):
-    """Enables a post to be edited via webpage."""
+    """Enables a post objects to be edited before commit via webpage."""
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -42,5 +42,13 @@ def post_edit(request, pk):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 def post_draft_list(request):
+    """Obtains unpublished posts and displays as post_draft_list."""
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
+
+def post_publish(request, pk):
+    """Obtains draft object (no published date) and publishes, returning
+    to post details view."""
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
