@@ -1,11 +1,12 @@
 {% extends 'blog/base.html' %}
+{% load martortags %}
 
 {% block content %}
     {% for post in posts %}
         <div class="post">
             <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
-            <p>{{ post.text|truncatechars:400 }}</p>
+            <p>{{ post.text|safe_markdown|truncatechars:400 }}</p>
         </div>
     {% endfor %}
 {% endblock %}

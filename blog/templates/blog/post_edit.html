@@ -3,7 +3,8 @@
 {% block content %}
     <h2>New post</h2>
     <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+        {% load martortags %}
+        {{ form.as_p|safe_markdown }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}
