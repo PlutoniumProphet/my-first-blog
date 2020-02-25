@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 
+
 class Post(models.Model):
     """Model a user's post."""
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
