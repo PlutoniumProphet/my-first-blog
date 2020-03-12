@@ -8,7 +8,8 @@
                 {{ post.published_date }}
             </div>
             <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-            <p>{{ post.text|safe_markdown|linebreaksbr|truncatechars:600 }}</p>
+            {{ post.text|safe_markdown|truncatechars:600 }}
+            <br>
             {% if post.approved_comments %}
                 <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
             {% endif %}
